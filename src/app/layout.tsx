@@ -7,7 +7,7 @@ export default function mainLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={style.body}>
         <Header/>
         <main className={style.main}>{children}</main>
         <footer></footer>

@@ -9,6 +9,7 @@ export function Header() {
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={100} height={50}></Image>
       </Link>
+      
       <Menu/>
     </header>
   );

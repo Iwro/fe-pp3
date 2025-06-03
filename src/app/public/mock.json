@@ -1,0 +1,44 @@
+{
+    "talleres": [
+        {
+            "id": 1,
+            "usuario_id": 1,
+            "nombre_taller": "Taller mecanico argven",
+            "ciudad": "Buenos Aires",
+            "barrio": "Paternal",
+            "direccion": "Espinosa 2900",
+            "latitud": -34.5998588,
+            "longitud": -58.5038056
+        },
+        {
+            "id": 2,
+            "usuario_id": 2,
+            "nombre_taller": "Taller mecanico alberto", 
+            "ciudad": "Buenos Aires",   
+            "barrio": "Caballito",  
+            "direccion": "Av. juan bautista alberdi 28",    
+            "latitud": -34.6261165, 
+            "longitud": -58.4901429
+        },
+        {
+            "id": 3,
+            "usuario_id": 3,
+            "nombre_taller": "Mecanica marcos",
+            "ciudad": "Buenos Aires",
+            "barrio": "Boedo",
+            "direccion": "Av. pavón 4302",
+            "latitud": -34.6309754,
+            "longitud": -58.4461728
+        },
+        {
+            "id": 4,
+            "usuario_id": 4,
+            "nombre_taller": "Monaco motor taller mecanico",
+            "ciudad": "Buenos Aires",
+            "barrio": "Almagro",
+            "direccion": "Venezuela 3361",
+            "latitud": -34.6217952,
+            "longitud": -58.4526452
+        }
+    ]
+}
