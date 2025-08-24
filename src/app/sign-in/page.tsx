@@ -1,16 +1,16 @@
-"use client"
+"use client";
 import Link from "next/link";
-import styles from "./sign-in.module.css"
+import styles from "./sign-in.module.css";
 import { useRouter } from "next/navigation";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 export default function SignIn() {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    email: '',
-    contraseña: '',
+    email: "",
+    contrasena: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,42 +21,57 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
-      console.log("HOLA DATA",data);
-      
+      console.log("HOLA DATA", data);
+
       if (!data.token) {
-        toast.error('Error al ingresar usuario');
+        toast.error("Error al ingresar usuario");
       } else {
-        localStorage.setItem('token', data.token);
-        toast.success('Acceso exitoso');
-        
+        localStorage.setItem("token", data.token);
+        toast.success("Acceso exitoso");
+
         setTimeout(() => {
-          router.push('/dashbord-user');
+          router.push("/dashbord-user");
         }, 2000);
       }
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      throw new Error(error.message || 'Error al crear el usuario');
-    }; }
-    return (
-      <main className={styles.main}>
-      <h1 className={styles.title}>
-        Iniciar sesión  
-      </h1>
+      throw new Error(error.message || "Error al crear el usuario");
+    }
+  };
+  return (
+    <main className={styles.main}>
+      <h1 className={styles.title}>Iniciar sesión</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <input type="email" name="email" placeholder="Email" className={styles.input} required onChange={handleChange} />
-        <input type="password" name="contraseña" placeholder="Contraseña" className={styles.input} required onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className={styles.input}
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="contrasena"
+          placeholder="Contraseña"
+          className={styles.input}
+          required
+          onChange={handleChange}
+        />
         <Link href={"/"}>Olvide mi contraseña</Link>
-        <button type="submit" className={styles.button}>Iniciar sesión</button>
+        <button type="submit" className={styles.button}>
+          Iniciar sesión
+        </button>
       </form>
     </main>
-    );
-  }
+  );
+}

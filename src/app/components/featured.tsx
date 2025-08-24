@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation'
 import { Mecanico } from "../utils/types";
 import { Button } from "./button";
 import styles from "./featured.module.css"
@@ -8,6 +9,12 @@ type FeaturedProps = {
     data: Mecanico[];
   };
 export function Featured ({data}: FeaturedProps) {
+      const router = useRouter()
+
+    const handleReservation = (id: number) => {
+        router.push("/mechanic/" + id )       
+    };
+
     return <div className={styles.container}>
             <h1>
                 Destacados
@@ -24,7 +31,7 @@ export function Featured ({data}: FeaturedProps) {
                         <h5>
                             Dirección: {item.direccion}
                         </h5>
-                        <Button className={styles.button} onClick={()=> {}}>Reservar</Button>
+                        <Button className={styles.button} onClick={()=> {handleReservation(item.id)}}>Reservar</Button>
                     </li>
                 ))}
             </ul>
