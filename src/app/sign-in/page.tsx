@@ -30,7 +30,6 @@ export default function SignIn() {
       });
 
       const data = await res.json();
-      console.log("HOLA DATA", data);
 
       if (!data.token) {
         toast.error("Error al ingresar usuario");

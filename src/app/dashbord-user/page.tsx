@@ -4,10 +4,14 @@ import { useRouter } from "next/navigation";
 import { fetchWithAuth } from "../utils/api";
 import styles from "./dashbord-user.module.css";
 import { User } from "../utils/types";
+import {userAtom} from "../components/atoms/atoms";
+import { useAtom } from "jotai";
 
 export default function DashbordUser() {
   const router = useRouter();
   const [usuario, setUsuario] = useState<User>();
+  const [userValue, setUserValue] = useAtom(userAtom);
+
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
@@ -30,6 +34,7 @@ export default function DashbordUser() {
         const data = await res.json();
 
         setUsuario(data.data[0]);
+        setUserValue(data.data[0])
       }
     });
 
@@ -53,7 +58,7 @@ export default function DashbordUser() {
           className={styles.input}
           required
           onChange={handleChange}
-          value={usuario.nombre}
+          value={userValue?.nombre}
         />
         <input
           type="text"
@@ -62,7 +67,7 @@ export default function DashbordUser() {
           className={styles.input}
           required
           onChange={handleChange}
-          value={usuario.apellido}
+          value={userValue?.apellido}
         />
         <input
           type="email"
@@ -71,7 +76,7 @@ export default function DashbordUser() {
           className={styles.input}
           required
           onChange={handleChange}
-          value={usuario.email}
+          value={userValue?.email}
         />
         <input
           type="tel"
@@ -80,7 +85,7 @@ export default function DashbordUser() {
           className={styles.input}
           required
           onChange={handleChange}
-          value={usuario.telefono}
+          value={userValue?.telefono}
         />
         {/* <input type="password" name="contraseña" placeholder="Contraseña" className={styles.input} onChange={handleChange} required /> */}
         <button type="submit" className={styles.button}>

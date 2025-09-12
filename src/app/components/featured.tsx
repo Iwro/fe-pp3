@@ -10,9 +10,16 @@ type FeaturedProps = {
   };
 export function Featured ({data}: FeaturedProps) {
       const router = useRouter()
-
+  
     const handleReservation = (id: number) => {
-        router.push("/mechanic/" + id )       
+        const token = localStorage.getItem("token");
+    
+        if (!token) {
+            return router.push("/login");
+        }
+        else {
+            router.push("/mechanic/" + id )       
+        }
     };
 
     return <div className={styles.container}>
