@@ -10,6 +10,8 @@ type Reserva = {
   fecha: string;
   hora: string;
   estado: string;
+  taller_nombre: string;
+  taller_direccion: string
 };
 export default function MyAppointments () {
     const [myAppointments, setMyAppointments] = useState<Reserva[]>();
@@ -34,7 +36,7 @@ export default function MyAppointments () {
             myAppointments?
                     <ul>
                         {myAppointments.map((reserva) => (
-                            <li key={reserva.id} >
+                            <li key={reserva.id} className={styles.li}>
                             <p>
                                 <strong>Fecha:</strong>{" "}
                                 {(reserva.fecha)}
@@ -42,12 +44,12 @@ export default function MyAppointments () {
                             <p>
                                 <strong>Hora:</strong> {reserva.hora.substring(0, 5)}
                             </p>
-                            {/* <p>
-                                <strong>Estado:</strong> {reserva.estado}
-                            </p> */}
-                            {/* <p>
-                                <strong>Taller:</strong> {reserva.taller_id}
-                            </p> */}
+                            <p>
+                                <strong>Taller:</strong> {reserva.taller_nombre}
+                            </p>
+                            <p>
+                                <strong>Direccion:</strong> {reserva.taller_direccion}
+                            </p>
                             </li>))}
                     </ul> : "Cargando"
         }
