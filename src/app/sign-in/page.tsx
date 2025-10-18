@@ -4,9 +4,12 @@ import styles from "./sign-in.module.css";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useState } from "react";
+// import { useSetAtom} from "jotai";
+// import { userAtom } from "../components/atoms/atoms";
 
 export default function SignIn() {
   const router = useRouter();
+  // const setUserValue = useSetAtom(userAtom);
 
   const [form, setForm] = useState({
     email: "",
@@ -35,10 +38,16 @@ export default function SignIn() {
         toast.error("Error al ingresar usuario");
       } else {
         localStorage.setItem("token", data.token);
-        toast.success("Acceso exitoso");
-
+        toast.success("Acceso exitoso"); 
+  //       setUserValue(    {id: data.id,
+  //           nombre: data.nombre,
+  //           apellido: data.apellido,
+  //           email: data.email,
+  //           telefono: data.telefono,
+  //           rol_id: data.rol_id,
+  // })
         setTimeout(() => {
-          router.push("/dashbord-user");
+          router.push("/");
         }, 2000);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

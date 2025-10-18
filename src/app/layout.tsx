@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import style from "./page.module.css"
 import { Provider } from 'jotai'
-
+import { MercadoPagoProvider } from "./lib/mercadopago";
 
 export default function mainLayout({
   children,
@@ -17,9 +17,11 @@ export default function mainLayout({
         <ToastContainer />
         <Header/>
         <main className={style.main}>
-          <Provider>
-            {children}
-          </Provider>
+          <MercadoPagoProvider>
+            <Provider>
+              {children}
+            </Provider>
+          </MercadoPagoProvider>
         </main>
         <footer></footer>
       </body>

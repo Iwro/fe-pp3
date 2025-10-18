@@ -1,8 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import styles from "./sign-in-shop.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import MapaUbicacion from "../components/map";
+
 export default function SignUpShop() {
   const router = useRouter();
 
@@ -13,13 +15,40 @@ export default function SignUpShop() {
     telefono: "",
     contrasena: "",
     rol_id: 2,
+    barrio_id: 0, 
+    latitud: 0,
+    longitud: 0,
+
   });
 
-  const [dias, setDias] = useState(["lun", "mar", "mie", "jue", "vie"]);
+  const [dias, setDias] = useState(["lun", "mar", "mie", "jue", "vie", "sab", "dom"]);
   const [duracion, setDuracion] = useState(60);
   const [horarioInicio, setHorarioInicio] = useState("09:00");
   const [horarioFin, setHorarioFin] = useState("18:00");
+  const [barrios, setBarrios] = useState<{ id: number; nombre: string }[]>([]);
+  const [ubicacion, setUbicacion] = useState<{ lat: number; lng: number } | null>(null);
+  
+  const handleUbicacionSeleccionada = (lat: number, lng: number) => {
+    setUbicacion({ lat, lng });
+    setForm({ ...form, latitud: lat, longitud: lng });
+    console.log({lat,lng});
+    console.log(form);
+    
+  };
 
+    useEffect(() => {
+    const fetchBarrios = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/barrios");
+        const data = await res.json();
+        
+        setBarrios(data.data);
+      } catch (error) {
+        console.error("Error cargando barrios", error);
+      }
+    };
+    fetchBarrios();
+  }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -107,14 +136,25 @@ export default function SignUpShop() {
           required
           onChange={handleChange}
         />
-        <input
-          type="text"
-          name="barrio"
-          placeholder="Barrio"
-          className={styles.input}
-          required
-          onChange={handleChange}
-        />
+        <label>
+          Barrio:
+          <select
+            name="barrio_id"
+            className={styles.input}
+            value={form.barrio_id}
+            required
+            onChange={(e) =>
+              setForm({ ...form, barrio_id: Number(e.target.value) })
+            }
+          >
+            <option value="">Seleccione un barrio</option>
+            {barrios?.map((b) => (
+              <option key={b.id} value={b.id}>
+                {b.nombre}
+              </option>
+            ))}
+          </select>
+        </label>
         <input
           type="text"
           name="direccion"
@@ -147,9 +187,9 @@ export default function SignUpShop() {
             value={duracion}
             onChange={(e) => setDuracion(Number(e.target.value))}
           >
-            <option value={30}>30 min</option>
+            {/* <option value={30}>30 min</option> */}
             <option value={60}>1 hora</option>
-            <option value={90}>1h 30m</option>
+            {/* <option value={90}>1h 30m</option> */}
           </select>
         </label>
         <div>
@@ -170,6 +210,14 @@ export default function SignUpShop() {
             </label>
           ))}
         </div>
+        <h3>Seleccioná tu ubicación</h3>
+        <MapaUbicacion onUbicacionSeleccionada={handleUbicacionSeleccionada} />
+
+        {ubicacion && (""
+          // <p>
+          //   📍 Ubicación seleccionada: {ubicacion.lat.toFixed(4)}, {ubicacion.lng.toFixed(4)}
+          // </p>
+        )}
         <button type="submit" className={styles.button}>
           Registrar
         </button>

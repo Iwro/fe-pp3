@@ -1,6 +1,6 @@
-.container {
+/* .container {
 
-}
+} */
 
 .cardContainer {
     display: flex;
@@ -21,4 +21,12 @@
     padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: seagreen;
+}
+
+.by_map {
+    padding: 0px 20px;
+}
+
+.search_button {
+    margin: 0 0 0 20px;
 }
