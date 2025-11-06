@@ -11,7 +11,6 @@ import { fetchWithAuth } from "@/app/utils/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-
 export default function Mechanic() {
   const router = useRouter();
   const params = useParams();
@@ -53,6 +52,12 @@ export default function Mechanic() {
       return;
     }
     const formatedDate = formatDate(dateInfo as Date)
+    const compareDate = new Date()
+    if (dateInfo?dateInfo<compareDate:"") {
+      toast.error("La fecha no es válida.")
+      console.log("la fecha no es correcta")
+      return
+     }
     const response = await fetchWithAuth(
       `http://localhost:3001/api/turnos/${id}`,
       {
@@ -115,8 +120,7 @@ export default function Mechanic() {
                 <select   
                   id="horarios" 
                   value={dateInfo?.toLocaleDateString()} 
-                  onChange={handleHourChange}
-                >
+                  onChange={handleHourChange}>
                   <option value="">-- Elige un horario --</option>
                   {horariosDisponibles?.map((horario, index) => (
                     <option key={index} value={horario}>

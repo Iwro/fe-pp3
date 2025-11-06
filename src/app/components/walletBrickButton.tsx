@@ -1,4 +1,3 @@
-// src/components/WalletBrickButton.tsx
 import { useEffect } from "react";
 import { Wallet } from "@mercadopago/sdk-react";
 
@@ -7,8 +6,6 @@ type Props = {
 };
 
 export const WalletBrickButton = ({ preferenceId }: Props) => {
-//   const divRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     if (!preferenceId) return;
   }, [preferenceId]);

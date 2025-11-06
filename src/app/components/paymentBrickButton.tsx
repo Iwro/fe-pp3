@@ -1,6 +1,4 @@
 "use client";
-
-// import { useEffect, useState } from "react";
 import { Payment } from "@mercadopago/sdk-react";
 
 type Props = {

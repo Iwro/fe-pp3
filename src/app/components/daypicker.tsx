@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { es } from "react-day-picker/locale";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
@@ -7,7 +6,6 @@ import { useAtom } from "jotai";
 
 
 export function DatePicker() {
-  // const [selected, setSelected] = useState<Date>();
     const [dateInfo, setDateInfo] = useAtom(dateAtom)
 
 
@@ -18,10 +16,6 @@ export function DatePicker() {
       selected={dateInfo}
       onSelect={setDateInfo}
       locale={es}
-      // footer={
-        // selected ? `Selected: ${selected.toLocaleDateString()}` : "Seleccione una fecha."
-        // dateInfo ? `Selected: ${dateInfo?.toLocaleDateString()}` : "Seleccione una fecha."
-      // }
     />
   );
 }

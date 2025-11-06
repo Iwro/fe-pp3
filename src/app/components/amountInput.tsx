@@ -31,21 +31,10 @@ const PrecioInput: React.FC<PrecioProps> = ({ montoBackend, id }) => {
     }
     updateAmount()
   }, []);
-
-  // Si el monto del backend cambia, lo sincronizamos
-//   useEffect(() => {
-//     setMonto(montoBackend);
-//   }, [montoBackend]);
-
-//   console.log(montoBackend);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMonto(Number(e.target.value));
   };
-
-//   const handleGuardar = () => {
-//     onGuardar(monto);
-//   };
 
   return (
     <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>

@@ -31,9 +31,6 @@ export default function SignUpShop() {
   const handleUbicacionSeleccionada = (lat: number, lng: number) => {
     setUbicacion({ lat, lng });
     setForm({ ...form, latitud: lat, longitud: lng });
-    console.log({lat,lng});
-    console.log(form);
-    
   };
 
     useEffect(() => {

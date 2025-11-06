@@ -37,9 +37,6 @@ export default function MyAppointments () {
             if (data.data[0].talleres){
                 setIsClient(true)
             } else {setIsClient(false)};
-            // console.log(typeof data);
-            // console.log("mis citas: ",data.data[0].talleres? "es cliente" : "es taller");
-            
         }
         fetchAppointments()
     }, []);
